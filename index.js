@@ -1,31 +1,39 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser");
 const { response } = require("express");
+const database = require("mime-db");
 
 // middleware config
 
 const app = express();
+app.use(express.json());
 const port = process.env.PORT;
 app.use(cors());
+
 const mongoSchema = new mongoose.Schema({
-    Fragen: String,
-    a: String,
-    b: String,
-    c: String,
+  question: String,
+  answers: [
+    {
+      answer: String,
+      points: Number
+    }
+  ]
 });
-const MongoDB = mongoose.model("MongoDB", mongoSchema, "questions");
 
-app.use(bodyParser.urlencoded({extended: true}));
+const Question = mongoose.model("MongoDB", mongoSchema, "questions");
 
-
-mongoose.connect(process.env.DB_URI);
-app.use('/', async (req, res) => {
+// app.use(bodyParser.urlencoded({extended: true}));
+console.log(process.env.DB_URI);
+app.get('/', async (req, res) => {
     try {
-      const connection = await MongoDB.find().exec();
+      await mongoose.connect(process.env.DB_URI);
+      const questions = await Question.find();
       res.json(questions);
+      console.log(questions);
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
