@@ -98,6 +98,7 @@
     "negotiator": "^0.6.3",
     "node-addon-api": "^3.2.1",
     "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.16",
     "nopt": "^5.0.0",
     "npmlog": "^5.0.1",
     "object-assign": "^4.1.1",
@@ -150,7 +151,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
