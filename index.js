@@ -23,7 +23,7 @@ const mongoSchema = new mongoose.Schema({
     }
   ]
 });
-
+// moin
 const Question = mongoose.model("MongoDB", mongoSchema, "questions");
 
 // app.use(bodyParser.urlencoded({extended: true}));
